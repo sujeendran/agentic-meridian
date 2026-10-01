@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meridian Co-pilot</title>
+<link rel="stylesheet" href="/static/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@15/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><span class="logo">◆</span> Meridian Co-pilot</div>
+  <div class="dataset" id="datasetChip">Loading data…</div>
+</header>
+
+<main class="layout">
+  <!-- Chat -->
+  <section class="chat">
+    <div class="job" id="jobBanner" hidden>
+      <span class="spinner"></span>
+      <div class="job-text">
+        <strong id="jobLabel"></strong> <span class="muted" id="jobElapsed"></span>
+        <div class="muted small" id="jobProgress"></div>
+      </div>
+      <button class="btn ghost small" id="stopBtn">Stop</button>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="welcome" id="welcome">
+        <h2>Model with Meridian, together.</h2>
+        <p>I can fit and diagnose the model, tune ROI priors toward your benchmarks,
+          write reports and optimize budget. Fits run in the background, so keep
+          chatting while they sample.</p>
+        <div class="suggestions">
+          <button>Summarize the dataset and suggest ROI priors</button>
+          <button>Fit the model with the current priors</button>
+          <button>Set benchmark shares 25/15/10/30/20 and auto-tune</button>
+          <button>What does R-hat tell me?</button>
+        </div>
+      </div>
+    </div>
+
+    <form class="composer" id="composer">
+      <label class="btn ghost icon" title="Upload a CSV">
+        <input type="file" id="fileInput" accept=".csv" hidden>⤒
+      </label>
+      <textarea id="input" rows="1" placeholder="Message the co-pilot…"></textarea>
+      <button class="btn primary" type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Dashboard -->
+  <section class="dashboard">
+    <nav class="tabs" id="tabs">
+      <button data-tab="overview" class="active">Overview</button>
+      <button data-tab="priors">Priors &amp; settings</button>
+      <button data-tab="tuning">Fits</button>
+      <button data-tab="reports">Reports</button>
+      <button data-tab="budget">Budget</button>
+    </nav>
+
+    <div class="tab-panel" id="tab-overview">
+      <div class="panel-head">
+        <h3>Model results</h3>
+        <select id="runSelect"></select>
+      </div>
+      <div class="empty" id="overviewEmpty">No fits yet. Ask the co-pilot to fit the model, or use <em>Fit model</em> on the Priors tab.</div>
+      <div id="overviewBody" hidden>
+        <div class="tiles" id="tiles"></div>
+        <div class="card"><h4>Expected vs actual</h4><div class="chart" id="chart-fit"></div></div>
+        <div class="grid-2">
+          <div class="card"><h4>Contribution share vs benchmark</h4><div class="chart" id="chart-shares"></div></div>
+          <div class="card"><h4>ROI by channel (90% CI)</h4><div class="chart" id="chart-roi"></div></div>
+        </div>
+        <div class="card"><h4>Convergence (R-hat by parameter)</h4><div class="chart" id="chart-rhat"></div></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-priors" hidden>
+      <div class="panel-head">
+        <h3>ROI priors</h3>
+        <div class="actions">
+          <button class="btn ghost" id="applyPriors">Apply edits</button>
+          <button class="btn primary" id="fitBtn">Fit model</button>
+        </div>
+      </div>
+      <table class="table" id="priorsTable"></table>
+      <div class="grid-2">
+        <div class="card"><h4>Model settings</h4><dl class="kv" id="settingsList"></dl></div>
+        <div class="card"><h4>Auto-tune targets</h4><dl class="kv" id="targetsList"></dl></div>
+      </div>
+      <div class="card" id="guidanceCard" hidden><h4>Tuning guidance</h4><ul id="guidanceList"></ul></div>
+    </div>
+
+    <div class="tab-panel" id="tab-tuning" hidden>
+      <div class="panel-head"><h3>Fit history</h3></div>
+      <div class="empty" id="runsEmpty">Each fit, manual or auto-tuned, appears here with its metrics and the tuner's reasoning.</div>
+      <div class="timeline" id="runsList"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-reports" hidden>
+      <div class="panel-head">
+        <h3>Meridian reports</h3>
+        <div class="segmented" id="reportSwitch">
+          <button data-report="summary" class="active">Model summary</button>
+          <button data-report="health">Health card</button>
+        </div>
+      </div>
+      <div class="empty" id="reportsEmpty">Ask the co-pilot to “generate reports” once you have a fit.</div>
+      <iframe id="reportFrame" sandbox="allow-scripts" hidden></iframe>
+    </div>
+
+    <div class="tab-panel" id="tab-budget" hidden>
+      <div class="panel-head"><h3>Budget scenarios</h3></div>
+      <div class="empty" id="budgetEmpty">Ask the co-pilot to optimize the budget, e.g. “optimize a 200M budget”.</div>
+      <div id="scenarioList"></div>
+    </div>
+  </section>
+</main>
+
+<div class="toast" id="toast" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

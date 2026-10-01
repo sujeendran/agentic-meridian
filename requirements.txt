@@ -1,0 +1,6 @@
+# On top of the repo's .venv (google-meridian, tensorflow, fastapi, uvicorn, pandas, altair)
+google-adk
+litellm
+python-multipart
+tensorflow[and-cuda]
+google-meridian[and-cuda,schema]

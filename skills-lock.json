@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "skills": {
+    "google-agents-cli-adk-code": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-adk-code/SKILL.md",
+      "computedHash": "d372d09536c93072b8f8891c6da19c1030dd20e41be4fcc70dfeac0a2d4ab4dd"
+    },
+    "google-agents-cli-deploy": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-deploy/SKILL.md",
+      "computedHash": "8b32298f7d6b9a3b8013b49113afa4e95c867af7e7ffbb4ed5fb8de60d010662"
+    },
+    "google-agents-cli-eval": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-eval/SKILL.md",
+      "computedHash": "49b6f7a33c48fede22cf8ff3249cb73128037d98c9cd444fe105e929726d7106"
+    },
+    "google-agents-cli-observability": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-observability/SKILL.md",
+      "computedHash": "a1ac9534119a5c48ab2bee213946b27cf8f4214cd5ab65f97155351907621048"
+    },
+    "google-agents-cli-publish": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-publish/SKILL.md",
+      "computedHash": "71370d8a24c6138059181653acdb63f28832d8e8dfbd3b4e2fda3fc9734f381c"
+    },
+    "google-agents-cli-scaffold": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-scaffold/SKILL.md",
+      "computedHash": "6387df16205b72f6064d4fa5cb4b6ed3883566dd628bfda4eb9ea2a2d62db4e7"
+    },
+    "google-agents-cli-workflow": {
+      "source": "google/agents-cli",
+      "sourceType": "github",
+      "skillPath": "skills/google-agents-cli-workflow/SKILL.md",
+      "computedHash": "fff35043a3a747f3f1d5b52c45c9b29129cd07964cc899e8eeb44108250142f7"
+    },
+    "meridian-budget-optimization": {
+      "source": "google/meridian",
+      "sourceType": "github",
+      "skillPath": "skills/meridian_budget_optimization/SKILL.md",
+      "computedHash": "2c0a20943150c4c5e935db168964247cafa7d784122801a28a023865b8c41f9f"
+    },
+    "meridian-doc-consultant": {
+      "source": "google/meridian",
+      "sourceType": "github",
+      "skillPath": "skills/meridian_doc_consultant/SKILL.md",
+      "computedHash": "54a1106b8f1b64a8b58d0345dcc016af45b44dbce3e097f80019b45bffa66fcb"
+    },
+    "meridian-model-building": {
+      "source": "google/meridian",
+      "sourceType": "github",
+      "skillPath": "skills/meridian_model_building/SKILL.md",
+      "computedHash": "0c0fec9c3d630f5a98265b76673e02d64fe74f02b9679204c5acba5a213c679d"
+    },
+    "meridian-result-visualization": {
+      "source": "google/meridian",
+      "sourceType": "github",
+      "skillPath": "skills/meridian_result_visualization/SKILL.md",
+      "computedHash": "94f3931fc25a958245faaedec1ac7c91d083da1615f4f709f4e1fd2fcba49cc8"
+    },
+    "meridian-scenario-planner": {
+      "source": "google/meridian",
+      "sourceType": "github",
+      "skillPath": "skills/meridian_scenario_planner/SKILL.md",
+      "computedHash": "d280eabcd3215883f9d615043c4d170e16f7580d65b1bab08d07e569fb161748"
+    }
+  }
+}
