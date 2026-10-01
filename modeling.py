@@ -13,9 +13,12 @@ import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# The TensorFlow backend is ~2x faster than JAX for sampling on this GPU, and it
-# uses float32 so plain numpy priors work. Must be set before importing meridian.
-os.environ.setdefault("MERIDIAN_BACKEND", "tensorflow")
+# JAX backend (Meridian's default): Tensorflow is deprecated.
+# Set MERIDIAN_BACKEND=tensorflow to switch back. 
+# Must be set before importing meridian.
+os.environ.setdefault("MERIDIAN_BACKEND", "jax")
+# Persist compiled kernels across server restarts.
+# os.environ.setdefault("JAX_COMPILATION_CACHE_DIR", str(Path(__file__).parent / ".jax_cache"))
 
 import altair as alt
 import numpy as np

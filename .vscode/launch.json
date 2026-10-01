@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            // No --reload: a reload would kill running MCMC fits and in-memory sessions.
+            "name": "Agentic Meridian: uvicorn (server.py)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "server:app",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8081"
+            ],
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "justMyCode": true,
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                // debug launches don't source .venv/bin/activate,
+                // so without this TensorFlow silently falls back to CPU.
+                "LD_LIBRARY_PATH": "${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cublas/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cuda_cccl/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cuda_cupti/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cuda_nvrtc/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cuda_runtime/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cudnn/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cufft/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/curand/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cusolver/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/cusparse/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/nccl/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/nvjitlink/lib:${workspaceFolder}/.venv/lib/python3.12/site-packages/nvidia/nvshmem/lib:/usr/lib/wsl/lib"
+            },
+            "serverReadyAction": {
+                "pattern": "Uvicorn running on (https?://\\S+)",
+                "uriFormat": "%s",
+                "action": "openExternally"
+            }
+        }
+    ]
+}

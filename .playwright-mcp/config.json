@@ -1,0 +1,12 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "isolated": true,
+    "launchOptions": { "headless": false },
+    "contextOptions": {
+      "viewport": { "width": 1440, "height": 900 },
+      "recordVideo": { "dir": "demo_videos", "size": { "width": 1440, "height": 900 } }
+    }
+  },
+  "outputDir": ".playwright-mcp/output"
+}
