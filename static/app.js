@@ -155,6 +155,8 @@ document.querySelectorAll("#tabs button").forEach((btn) =>
   btn.addEventListener("click", () => {
     document.querySelectorAll("#tabs button").forEach((b) => b.classList.toggle("active", b === btn));
     document.querySelectorAll(".tab-panel").forEach((p) => (p.hidden = p.id !== `tab-${btn.dataset.tab}`));
+    // Container-width charts drawn while their tab was hidden measured 0px; make Vega re-measure.
+    window.dispatchEvent(new Event("resize"));
   }));
 
 $("runSelect").addEventListener("change", (e) => {

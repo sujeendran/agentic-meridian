@@ -187,12 +187,14 @@ def get_results(run_id: int, tool_context: ToolContext) -> dict:
 
 
 def compare_runs(tool_context: ToolContext) -> dict:
-    """One row per fit so far with headline metrics, to compare iterations."""
+    """One row per fit so far with headline metrics, the ROI priors that fit used
+    (input) and the posterior ROI means it estimated (output), to compare iterations."""
     def action(ws):
         return {"fits": [
             {"fit": r.id, "source": r.source, "r2": r.metrics["r2"], "mape": r.metrics["mape"],
              "max_rhat": r.metrics["max_rhat"], "gap": r.metrics["gap"],
-             "roi_means": {c: v["mean"] for c, v in r.metrics["roi"].items()}}
+             "prior_roi": {c: f"{p['mean']:g} ± {p['sd']:g}" for c, p in r.priors.items()},
+             "posterior_roi_means": {c: v["mean"] for c, v in r.metrics["roi"].items()}}
             for r in ws.runs
         ]}
     return _call(tool_context, action)
